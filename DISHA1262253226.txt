@@ -1,0 +1,1046 @@
+ ASSIGNMENT 1 --- Write a program in C to check whether a given year is a Leap Year
+ #include <stdio.h>
+
+ int main() {
+    int year;
+
+    printf("Enter a year: ");
+    scanf("%d", &year);
+
+    // Check leap year condition
+    if (year % 400 == 0) {
+        printf("%d is a Leap Year\n", year);
+    }
+    else if (year % 4 == 0 && year % 100 != 0) {
+        printf("%d is a Leap Year\n", year);
+    }
+    else {
+        printf("%d is Not a Leap Year\n", year);
+    }
+
+    return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 2----Write a menu driven program in C to implement the basic arithmetic operations such as Addition, Subtraction, Multiplication, and Division.
+#include <stdio.h>
+
+int main() {
+    int choice;
+    float num1, num2, result;
+
+    printf("===== MENU =====\n");
+    printf("1. Addition\n");
+    printf("2. Subtraction\n");
+    printf("3. Multiplication\n");
+    printf("4. Division\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    printf("Enter two numbers: ");
+    scanf("%f %f", &num1, &num2);
+
+    switch(choice) {
+        case 1:
+            result = num1 + num2;
+            printf("Addition = %.2f\n", result);
+            break;
+
+        case 2:
+            result = num1 - num2;
+            printf("Subtraction = %.2f\n", result);
+            break;
+
+        case 3:
+            result = num1 * num2;
+            printf("Multiplication = %.2f\n", result);
+            break;
+
+        case 4:
+            if(num2 != 0) {
+                result = num1 / num2;
+                printf("Division = %.2f\n", result);
+            } else {
+                printf("Error: Division by zero is not allowed!\n");
+            }
+            break;
+
+        default:
+            printf("Invalid choice!\n");
+    }
+
+    return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 3---Write a program in C to generate multiplication tables for a given number.
+#include <stdio.h>
+
+int main() {
+    int num, i;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    printf("Multiplication Table of %d:\n", num);
+
+    for(i = 1; i <= 10; i++) {
+        printf("%d x %d = %d\n", num, i, num * i);
+    }
+
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 4----Write a C Program to calculate the salary of an employee given his basic pay (taken as input from the user). Calculate gross salary of employee. Let HRA be 10 % of basic pay and TA be 5% of basic pay. Let employees pay professional tax as 2% of  total salary. Calculate net salary payable after deductions.
+
+#include <stdio.h>
+
+int main() {
+    float basic, hra, ta, gross, tax, net;
+
+    // Input basic salary
+    printf("Enter Basic Salary: ");
+    scanf("%f", &basic);
+
+    // Calculate allowances
+    hra = 0.10 * basic;   // 10% HRA
+    ta  = 0.05 * basic;   // 5% TA
+
+    // Calculate gross salary
+    gross = basic + hra + ta;
+
+    // Calculate professional tax (2% of gross)
+    tax = 0.02 * gross;
+
+    // Calculate net salary
+    net = gross - tax;
+
+    // Display results
+    printf("\nHRA = %.2f", hra);
+    printf("\nTA = %.2f", ta);
+    printf("\nGross Salary = %.2f", gross);
+    printf("\nProfessional Tax = %.2f", tax);
+    printf("\nNet Salary = %.2f\n", net);
+
+    return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 6------To demonstrate two different approaches for calculating the factorial of a number: iterative (non-recursive) and recursive, showcasing the versatility of problem-solving methods in programming
+ITERATIVE NON RECURSIVE
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    long long fact = 1;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    if(n < 0) {
+        printf("Factorial not defined for negative numbers\n");
+        return 0;
+    }
+
+    for(i = 1; i <= n; i++) {
+        fact = fact * i;
+    }
+
+    printf("Factorial (Iterative) = %lld\n", fact);
+
+    return 0;
+}
+
+
+RECURSIVE FACTORIAL
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    long long fact = 1;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    if(n < 0) {
+        printf("Factorial not defined for negative numbers\n");
+        return 0;
+    }
+
+    for(i = 1; i <= n; i++) {
+        fact = fact * i;
+    }
+
+    printf("Factorial (Iterative) = %lld\n", fact);
+
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 7-----
+
+Write a C program to accept student details and display their result using an array of structures
+#include <stdio.h>
+
+struct student {
+    int roll;
+    char name[50];
+    float marks1, marks2, marks3;
+    float total, percentage;
+    char grade;
+};
+
+int main() {
+    struct student s[100];
+    int n, i;
+
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details of student %d\n", i + 1);
+
+        printf("Roll No: ");
+        scanf("%d", &s[i].roll);
+
+        printf("Name: ");
+        scanf(" %[^\n]", s[i].name);
+
+        printf("Marks in 3 subjects: ");
+        scanf("%f %f %f", &s[i].marks1, &s[i].marks2, &s[i].marks3);
+
+        s[i].total = s[i].marks1 + s[i].marks2 + s[i].marks3;
+        s[i].percentage = s[i].total / 3;
+
+        // Grade calculation
+        if(s[i].percentage >= 75)
+            s[i].grade = 'A';
+        else if(s[i].percentage >= 60)
+            s[i].grade = 'B';
+        else if(s[i].percentage >= 50)
+            s[i].grade = 'C';
+        else
+            s[i].grade = 'F';
+    }
+
+    printf("\n--- Student Results ---\n");
+
+    for(i = 0; i < n; i++) {
+        printf("\nStudent %d\n", i + 1);
+        printf("Roll No: %d\n", s[i].roll);
+        printf("Name: %s\n", s[i].name);
+        printf("Total Marks: %.2f\n", s[i].total);
+        printf("Percentage: %.2f\n", s[i].percentage);
+        printf("Grade: %c\n", s[i].grade);
+    }
+
+    return 0;
+}
+---------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 8---Write a program in C to accept marks of five courses of a student and compute the result. A student is considered PASS if he/she scores 40 marks or more in each course. If the student passes, calculate the aggregate percentage and assign the grade as follows:
+
+• Aggregate ≥ 75% : Distinction
+• Aggregate ≥ 60% and < 75% : First Division
+• Aggregate ≥ 50% and < 60% : Second Division
+• Aggregate ≥ 40% and < 50% : Third Division
+
+#include <stdio.h>
+
+int main() {
+    float m1, m2, m3, m4, m5;
+    float total, percentage;
+
+    printf("Enter marks of 5 subjects:\n");
+    scanf("%f %f %f %f %f", &m1, &m2, &m3, &m4, &m5);
+
+    // Check pass condition
+    if(m1 < 40 || m2 < 40 || m3 < 40 || m4 < 40 || m5 < 40) {
+        printf("Result: FAIL\n");
+        return 0;
+    }
+
+    // Calculate total and percentage
+    total = m1 + m2 + m3 + m4 + m5;
+    percentage = total / 5;
+
+    printf("Result: PASS\n");
+    printf("Total Marks = %.2f\n", total);
+    printf("Percentage = %.2f%%\n", percentage);
+
+    // Grade assignment
+    if(percentage >= 75)
+        printf("Grade: Distinction\n");
+    else if(percentage >= 60)
+        printf("Grade: First Division\n");
+    else if(percentage >= 50)
+        printf("Grade: Second Division\n");
+    else
+        printf("Grade: Third Division\n");
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 9-----Write a program in C to check whether the given number is an Armstrong number or not.
+An Armstrong number is an integer with three digits such that the sum of the cubes of its digits is equal to the number itself.
+
+int main()
+{
+    int a,i,sum=0,rem,temp;
+    printf("enter the number:::");
+    scanf("%d",&a);
+    temp=a;
+    for(i=0;i<temp;i++)
+    {
+        rem=temp%10;
+        sum=sum+rem*rem*rem;
+        temp=temp/10;
+
+    }
+      printf("the sum of cube of number %d is %d\n",a,sum);
+
+    if(sum==a)
+        printf("the number %d is armstrong number",a);
+    else
+        printf("the number is not an armstrong number");
+
+--------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 10-----Write a program in C to simulate a simple calculator that performs basic arithmetic operations such as addition, subtraction, multiplication, and division. The calculator should also perform special operations like computing xʸ (power) and x! (factorial).
+#include <stdio.h>
+
+// Function for factorial
+long long factorial(int n) {
+    long long fact = 1;
+    int i;
+
+    for(i = 1; i <= n; i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+// Function for power
+double power(double base, int exp) {
+    double result = 1;
+    int i;
+
+    for(i = 1; i <= exp; i++) {
+        result *= base;
+    }
+    return result;
+}
+
+int main() {
+    int choice;
+    double a, b;
+    int n;
+
+    do {
+        printf("\n--- Simple Calculator ---\n");
+        printf("1. Addition\n");
+        printf("2. Subtraction\n");
+        printf("3. Multiplication\n");
+        printf("4. Division\n");
+        printf("5. Power (x^y)\n");
+        printf("6. Factorial (x!)\n");
+        printf("7. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &a, &b);
+                printf("Result = %.2lf\n", a + b);
+                break;
+
+            case 2:
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &a, &b);
+                printf("Result = %.2lf\n", a - b);
+                break;
+
+            case 3:
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &a, &b);
+                printf("Result = %.2lf\n", a * b);
+                break;
+
+            case 4:
+                printf("Enter two numbers: ");
+                scanf("%lf %lf", &a, &b);
+                if(b != 0)
+                    printf("Result = %.2lf\n", a / b);
+                else
+                    printf("Error! Division by zero\n");
+                break;
+
+            case 5:
+                printf("Enter base and exponent: ");
+                scanf("%lf %d", &a, &n);
+                printf("Result = %.2lf\n", power(a, n));
+                break;
+
+            case 6:
+                printf("Enter a number: ");
+                scanf("%d", &n);
+                if(n >= 0)
+                    printf("Result = %lld\n", factorial(n));
+                else
+                    printf("Factorial not defined for negative numbers\n");
+                break;
+
+            case 7:
+                printf("Exiting...\n");
+                break;
+
+            default:
+                printf("Invalid choice\n");
+        }
+
+    } while(choice != 7);
+
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 11--Write a program in C to accept a number from the user and compute the following:
+a) Square root of the number
+b) Square of the number
+c) Cube of the number
+d) Check whether the number is prime
+e) Factorial of the number
+f) Prime factors of the number
+
+#include <stdio.h>
+#include <math.h>
+
+// Function to check prime
+int isPrime(int n) {
+    if(n <= 1)
+        return 0;
+    for(int i = 2; i <= n/2; i++) {
+        if(n % i == 0)
+            return 0;
+    }
+    return 1;
+}
+
+// Function for factorial
+long long factorial(int n) {
+    long long fact = 1;
+    for(int i = 1; i <= n; i++)
+        fact *= i;
+    return fact;
+}
+
+int main() {
+    int n, i;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    // a) Square root
+    if(n >= 0)
+        printf("Square root = %.2f\n", sqrt(n));
+    else
+        printf("Square root not defined for negative numbers\n");
+
+    // b) Square
+    printf("Square = %d\n", n * n);
+
+    // c) Cube
+    printf("Cube = %d\n", n * n * n);
+
+    // d) Prime check
+    if(isPrime(n))
+        printf("The number is Prime\n");
+    else
+        printf("The number is NOT Prime\n");
+
+    // e) Factorial
+    if(n >= 0)
+        printf("Factorial = %lld\n", factorial(n));
+    else
+        printf("Factorial not defined for negative numbers\n");
+
+    // f) Prime factors
+    printf("Prime factors: ");
+    int temp = n;
+
+    for(i = 2; i <= temp; i++) {
+        while(n % i == 0) {
+            printf("%d ", i);
+            n = n / i;
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT -12  and compute:
+
+a) The smallest common divisor of the two numbers (other than 1, if any)
+b) The Greatest Common Divisor (GCD) of the two numbers
+
+#include <stdio.h>
+
+int main() {
+    int a, b, i, gcd, found = 0;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &a, &b);
+
+    // a) Smallest common divisor (other than 1)
+    for(i = 2; i <= (a < b ? a : b); i++) {
+        if(a % i == 0 && b % i == 0) {
+            printf("Smallest common divisor (other than 1) = %d\n", i);
+            found = 1;
+            break;
+        }
+    }
+
+    if(!found)
+        printf("No common divisor other than 1\n");
+
+    // b) GCD using Euclidean Algorithm
+    int x = a, y = b, temp;
+
+    while(y != 0) {
+        temp = y;
+        y = x % y;
+        x = temp;
+    }
+
+    gcd = x;
+    printf("GCD = %d\n", gcd);
+
+    return 0;
+}
+-----------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 13----Write a program in C to accept a number from the user and print the digits of the number in reverse order.
+#include <stdio.h>
+
+int main() {
+    int num, rem, reverse = 0;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    while(num != 0) {
+        rem = num % 10;              // get last digit
+        reverse = reverse * 10 + rem; // build reversed number
+        num = num / 10;              // remove last digit
+    }
+
+    printf("Reversed number = %d\n", reverse);
+
+    return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 15------In C programming, pseudo random numbers are generated using the rand() function available in the stdlib.h header file. These numbers are not truly random but are generated using a deterministic algorithm. The srand() function is used to set the seed value for random number generation. Usually, the current time is used as a seed to produce different sequences of numbers each time the program runs
+
+C Program: Generate Random Numbers using rand() and srand()
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int i;
+
+    // Set seed using current time
+    srand(time(0));
+
+    printf("Random numbers are:\n");
+
+    for(i = 1; i <= 5; i++) {
+        printf("%d\n", rand());
+    }
+
+    return 0;
+}
+
+
+
+Generate Random Numbers in a Range
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int i, num;
+
+    srand(time(0));
+
+    printf("Random numbers between 1 and 100:\n");
+
+    for(i = 1; i <= 5; i++) {
+        num = (rand() % 100) + 1;
+        printf("%d\n", num);
+    }
+
+    return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 14---------------------A binary number system uses only two digits: 0 and 1. Each digit of a binary number represents a power of 2 depending on its position. To convert a binary number into its decimal equivalent, each digit is multiplied by 2 raised to the power of its position and the results are added together. In C programming, this conversion can be implemented using loops and arithmetic operations.
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int binary, decimal = 0, rem, i = 0;
+
+    printf("Enter a binary number: ");
+    scanf("%d", &binary);
+
+    while(binary != 0) {
+        rem = binary % 10;                 // get last digit
+        decimal += rem * pow(2, i);        // multiply with 2^position
+        binary = binary / 10;              // remove last digit
+        i++;
+    }
+
+    printf("Decimal equivalent = %d\n", decimal);
+
+    return 0;
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 16---In C programming, arrays are used to store multiple values of the same data type. By using loops and conditional statements, it is possible to examine each element in the array and classify it based on certain conditions. In this program, the user enters N integers which are stored in an array. Each number is then checked using the modulus operator (%). If a number is divisible by 2, it is categorized as an even number; otherwise, it is an odd number. The program then displays two separate lists: one for even numbers and another for odd numbers.
+
+#include <stdio.h>
+
+int main() {
+    int arr[100], even[100], odd[100];
+    int n, i, e = 0, o = 0;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    printf("Enter %d integers:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Separate even and odd numbers
+    for(i = 0; i < n; i++) {
+        if(arr[i] % 2 == 0) {
+            even[e++] = arr[i];
+        } else {
+            odd[o++] = arr[i];
+        }
+    }
+
+    // Display even numbers
+    printf("\nEven numbers:\n");
+    for(i = 0; i < e; i++) {
+        printf("%d ", even[i]);
+    }
+
+    // Display odd numbers
+    printf("\nOdd numbers:\n");
+    for(i = 0; i < o; i++) {
+        printf("%d ", odd[i]);
+    }
+
+    return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 17------To accept the number of terms and find the sum of the sine series.
+
+#include <stdio.h>
+
+// Function to calculate factorial
+long long factorial(int n) {
+    long long fact = 1;
+    for(int i = 1; i <= n; i++)
+        fact *= i;
+    return fact;
+}
+
+int main() {
+    int n, i;
+    float x, sum = 0;
+
+    printf("Enter value of x (in radians): ");
+    scanf("%f", &x);
+
+    printf("Enter number of terms: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++) {
+        int power = 2 * i + 1;
+        float term = 1;
+
+        // Calculate x^power
+        for(int j = 1; j <= power; j++)
+            term *= x;
+
+        term = term / factorial(power);
+
+        // Alternate signs
+        if(i % 2 == 0)
+            sum += term;
+        else
+            sum -= term;
+    }
+
+    printf("Sum of sine series = %.5f\n", sum);
+
+    return 0;
+}
+-------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 18------------Write a C program that accepts a string from the user and performs the following string operations: i) Calculate length of string ii) String reversal iii) Equality check of two strings iv) Check palindrome v) Check substring.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[100], str2[100], rev[100];
+    int i, len = 0, flag = 1;
+
+    printf("Enter first string: ");
+    scanf(" %[^\n]", str1);
+
+    // i) Length
+    while(str1[len] != '\0')
+        len++;
+
+    printf("Length of string = %d\n", len);
+
+    // ii) Reverse
+    for(i = 0; i < len; i++) {
+        rev[i] = str1[len - i - 1];
+    }
+    rev[len] = '\0';
+
+    printf("Reversed string = %s\n", rev);
+
+    // iii) Equality check
+    printf("Enter second string: ");
+    scanf(" %[^\n]", str2);
+
+    if(strcmp(str1, str2) == 0)
+        printf("Strings are equal\n");
+    else
+        printf("Strings are NOT equal\n");
+
+    // iv) Palindrome check
+    for(i = 0; i < len; i++) {
+        if(str1[i] != rev[i]) {
+            flag = 0;
+            break;
+        }
+    }
+
+    if(flag)
+        printf("String is Palindrome\n");
+    else
+        printf("String is NOT Palindrome\n");
+
+    // v) Substring check
+    if(strstr(str1, str2) != NULL)
+        printf("Second string is a substring of first\n");
+    else
+        printf("Second string is NOT a substring of first\n");
+
+    return 0;
+}
+-------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT---19  Create Structure EMPLOYEE for storing details (Name, Designation, gender, Date of Joining and Salary). Define function members to compute a) total number of employees in an organization b) count of male and female employee c) Employee with salary more than 10,000 d) Employee with designation “Asst Manager”
+
+#include <stdio.h>
+#include <string.h>
+
+struct employee {
+    char name[50];
+    char designation[50];
+    char gender; // M or F
+    int day, month, year; // Date of Joining
+    float salary;
+};
+
+// a) Total number of employees
+void totalEmployees(int n) {
+    printf("\nTotal number of employees = %d\n", n);
+}
+
+// b) Count male and female employees
+void countGender(struct employee e[], int n) {
+    int male = 0, female = 0;
+
+    for(int i = 0; i < n; i++) {
+        if(e[i].gender == 'M' || e[i].gender == 'm')
+            male++;
+        else if(e[i].gender == 'F' || e[i].gender == 'f')
+            female++;
+    }
+
+    printf("Male employees = %d\n", male);
+    printf("Female employees = %d\n", female);
+}
+
+// c) Employees with salary > 10000
+void highSalary(struct employee e[], int n) {
+    printf("\nEmployees with salary > 10000:\n");
+
+    for(int i = 0; i < n; i++) {
+        if(e[i].salary > 10000) {
+            printf("Name: %s | Salary: %.2f\n", e[i].name, e[i].salary);
+        }
+    }
+}
+
+// d) Employees with designation "Asst Manager"
+void asstManager(struct employee e[], int n) {
+    printf("\nEmployees with designation 'Asst Manager':\n");
+
+    for(int i = 0; i < n; i++) {
+        if(strcmp(e[i].designation, "Asst Manager") == 0) {
+            printf("Name: %s | Designation: %s\n", e[i].name, e[i].designation);
+        }
+    }
+}
+
+int main() {
+    struct employee e[100];
+    int n;
+
+    printf("Enter number of employees: ");
+    scanf("%d", &n);
+
+    for(int i = 0; i < n; i++) {
+        printf("\nEnter details of employee %d\n", i + 1);
+
+        printf("Name: ");
+        scanf(" %[^\n]", e[i].name);
+
+        printf("Designation: ");
+        scanf(" %[^\n]", e[i].designation);
+
+        printf("Gender (M/F): ");
+        scanf(" %c", &e[i].gender);
+
+        printf("Date of Joining (dd mm yyyy): ");
+        scanf("%d %d %d", &e[i].day, &e[i].month, &e[i].year);
+
+        printf("Salary: ");
+        scanf("%f", &e[i].salary);
+    }
+
+    // Function calls
+    totalEmployees(n);
+    countGender(e, n);
+    highSalary(e, n);
+    asstManager(e, n);
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 20----Write a C function to swap two numbers with and without using pointers.
+1. Swap WITHOUT Using Pointers (Call by Value)
+#include <stdio.h>
+
+void swap(int a, int b) {
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+
+    printf("Inside function (after swap): a = %d, b = %d\n", a, b);
+}
+
+int main() {
+    int x, y;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &x, &y);
+
+    swap(x, y);
+
+    printf("In main (after function call): x = %d, y = %d\n", x, y);
+
+    return 0;
+}
+
+2. Swap USING Pointers (Call by Reference)
+
+#include <stdio.h>
+
+void swap(int *a, int *b) {
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x, y;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &x, &y);
+
+    swap(&x, &y);
+
+    printf("After swap: x = %d, y = %d\n", x, y);
+
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------------------------------
+ASSIGNMENT 21--Write a C program to copy contents of one file to another using file handling
+#include <stdio.h>
+
+int main() {
+    FILE *source, *destination;
+    char ch;
+
+    // Open source file in read mode
+    source = fopen("source.txt", "r");
+
+    if(source == NULL) {
+        printf("Error: Cannot open source file\n");
+        return 0;
+    }
+
+    // Open destination file in write mode
+    destination = fopen("destination.txt", "w");
+
+    if(destination == NULL) {
+        printf("Error: Cannot create destination file\n");
+        return 0;
+    }
+
+    // Copy contents character by character
+    while((ch = fgetc(source)) != EOF) {
+        fputc(ch, destination);
+    }
+
+    printf("File copied successfully!\n");
+
+    // Close files
+    fclose(source);
+    fclose(destination);
+
+    return 0;
+}
+------------------------------------------------------------------------------------------------------------------------
+ASSIGNMENT 22---------Write a menu driven program in C to perform various string operations using in-built functions.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[100], str2[100];
+    int choice;
+
+    do {
+        printf("\n--- STRING OPERATIONS MENU ---\n");
+        printf("1. Find Length of String\n");
+        printf("2. Copy String\n");
+        printf("3. Concatenate Strings\n");
+        printf("4. Compare Strings\n");
+        printf("5. Reverse String\n");
+        printf("6. Convert to Uppercase\n");
+        printf("7. Convert to Lowercase\n");
+        printf("0. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar(); // clear buffer
+
+        switch(choice) {
+            case 1:
+                printf("Enter a string: ");
+                fgets(str1, sizeof(str1), stdin);
+                str1[strcspn(str1, "\n")] = '\0';
+
+                printf("Length = %lu\n", strlen(str1));
+                break;
+
+            case 2:
+                printf("Enter a string: ");
+                fgets(str1, sizeof(str1), stdin);
+                str1[strcspn(str1, "\n")] = '\0';
+
+                strcpy(str2, str1);
+                printf("Copied string: %s\n", str2);
+                break;
+
+            case 3:
+                printf("Enter first string: ");
+                fgets(str1, sizeof(str1), stdin);
+                str1[strcspn(str1, "\n")] = '\0';
+
+                printf("Enter second string: ");
+                fgets(str2, sizeof(str2), stdin);
+                str2[strcspn(str2, "\n")] = '\0';
+
+                strcat(str1, str2);
+                printf("Concatenated string: %s\n", str1);
+                break;
+
+            case 4:
+                printf("Enter first string: ");
+                fgets(str1, sizeof(str1), stdin);
+                str1[strcspn(str1, "\n")] = '\0';
+
+                printf("Enter second string: ");
+                fgets(str2, sizeof(str2), stdin);
+                str2[strcspn(str2, "\n")] = '\0';
+
+                if(strcmp(str1, str2) == 0)
+                    printf("Strings are equal\n");
+                else
+                    printf("Strings are not equal\n");
+                break;
+
+            case 5:
+                printf("Enter a string: ");
+                fgets(str1, sizeof(str1), stdin);
+                str1[strcspn(str1, "\n")] = '\0';
+
+                strrev(str1); // Note: works in some compilers like Turbo C
+                printf("Reversed string: %s\n", str1);
+                break;
+
+            case 6:
+                printf("Enter a string: ");
+                fgets(str1, sizeof(str1), stdin);
+                str1[strcspn(str1, "\n")] = '\0';
+
+                for(int i = 0; str1[i] != '\0'; i++)
+                    str1[i] = toupper(str1[i]);
+
+                printf("Uppercase: %s\n", str1);
+                break;
+
+            case 7:
+                printf("Enter a string: ");
+                fgets(str1, sizeof(str1), stdin);
+                str1[strcspn(str1, "\n")] = '\0';
+
+                for(int i = 0; str1[i] != '\0'; i++)
+                    str1[i] = tolower(str1[i]);
+
+                printf("Lowercase: %s\n", str1);
+                break;
+
+            case 0:
+                printf("Exiting program...\n");
+                break;
+
+            default:
+                printf("Invalid choice!\n");
+        }
+
+    } while(choice != 0);
+
+    return 0;
+} 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
